@@ -19,6 +19,9 @@
     },
     "children": {
       "type": "array"
+    },
+    "requestParams": {
+      "type": "object"
     }
   },
   "required": ["name"],

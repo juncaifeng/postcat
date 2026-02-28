@@ -52,6 +52,42 @@ export class DbApiDataService extends DbBaseService<ApiData> {
       if (groupInfo.depth !== 0) {
         item.authInfo.isInherited = isInherited.inherit;
       }
+
+      // Header Inheritance Logic
+      let currentGroup = groupInfo;
+      const inheritedHeaders = [];
+
+      while (currentGroup) {
+        if (currentGroup.requestParams?.headerParams?.length) {
+          inheritedHeaders.push(...currentGroup.requestParams.headerParams);
+        }
+        if (currentGroup.parentId) {
+          const { data } = await this.groupService.baseService.read({ id: currentGroup.parentId });
+          currentGroup = data;
+        } else {
+          break;
+        }
+      }
+
+      const existingNames = new Set((item.requestParams.headerParams || []).map(h => h.name));
+      const headersToAdd = [];
+      const uniqueInheritedHeaders = [];
+      const inheritedNames = new Set();
+
+      inheritedHeaders.forEach(h => {
+        if (h.name && !inheritedNames.has(h.name)) {
+          inheritedNames.add(h.name);
+          uniqueInheritedHeaders.push(h);
+        }
+      });
+
+      uniqueInheritedHeaders.forEach(h => {
+        if (h.name && !existingNames.has(h.name)) {
+          headersToAdd.push(h);
+        }
+      });
+
+      item.requestParams.headerParams = [...headersToAdd, ...(item.requestParams.headerParams || [])];
     });
 
     await Promise.all(promiseArr);

@@ -71,6 +71,7 @@ export class GroupComponent implements OnDestroy, EditTabViewComponent {
     const params = {
       id: this.model.id,
       type: this.model.type,
+      requestParams: this.model.requestParams,
       authInfo: {
         authType: this.model.authInfo.authType,
         authInfo: this.authExtForm.validateForm?.value ? JSON.stringify(this.authExtForm.validateForm.value) : {}
@@ -113,6 +114,14 @@ export class GroupComponent implements OnDestroy, EditTabViewComponent {
     } else if (this.model.authInfo) {
       this.model.authInfo.authInfo = JSONParse(this.model.authInfo?.authInfo) || {};
     }
+    if (!this.model.requestParams) {
+      this.model.requestParams = {
+        headerParams: [],
+        queryParams: [],
+        restParams: [],
+        bodyParams: []
+      };
+    }
     this.initForm();
     this.eoOnInit.emit(this.model);
   }
@@ -126,6 +135,10 @@ export class GroupComponent implements OnDestroy, EditTabViewComponent {
       ...this.model,
       name: this.validateForm.value.name
     });
+  }
+  onHeaderParamsChange(headers) {
+    this.model.requestParams.headerParams = headers;
+    this.modelChange.emit(this.model);
   }
   isFormChange() {
     const formData = this.authExtForm.validateForm?.value;

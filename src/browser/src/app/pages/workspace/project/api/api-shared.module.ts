@@ -13,6 +13,7 @@ import { ParamsImportComponent } from 'pc/browser/src/app/pages/workspace/projec
 import { ApiTableService } from 'pc/browser/src/app/pages/workspace/project/api/service/api-table.service';
 import { SharedModule } from 'pc/browser/src/app/shared/shared.module';
 
+import { ApiEditFormComponent } from './http/edit/form/api-edit-form.component';
 import { ApiFormaterPipe } from './pipe/api-formater.pipe';
 import { ApiParamsNumPipe } from './pipe/api-param-num.pipe';
 
@@ -22,7 +23,8 @@ const COMPONENTS = [
   ActionComponent,
   ParamsImportComponent,
   ApiTestResultHeaderComponent,
-  ApiMockTableComponent
+  ApiMockTableComponent,
+  ApiEditFormComponent
 ];
 const SHARE_UI = [EoTableProModule, EoNgTabsModule];
 const SHARE_PIPE = [ApiFormaterPipe, ApiParamsNumPipe];

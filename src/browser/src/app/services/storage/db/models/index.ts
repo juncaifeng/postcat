@@ -1,6 +1,6 @@
 import { AuthInfo } from 'pc/browser/src/app/pages/workspace/project/api/constants/auth.model';
 import { ApiTestResData } from 'pc/browser/src/app/pages/workspace/project/api/service/test-server/test-server.model';
-import { ApiData } from 'pc/browser/src/app/services/storage/db/models/apiData';
+import { ApiData, RequestParams } from 'pc/browser/src/app/services/storage/db/models/apiData';
 
 export enum GroupType {
   /**
@@ -98,6 +98,7 @@ export interface Group extends Base {
   parentId?: number;
   sort?: number;
   authInfo?: AuthInfo;
+  requestParams?: RequestParams;
   projectUuid?: string;
   workSpaceUuid?: string;
   children?: Group[];

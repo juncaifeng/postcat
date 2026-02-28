@@ -16,10 +16,9 @@ import { ApiEditUtilService } from './api-edit-util.service';
 import { ApiEditComponent } from './api-edit.component';
 import { ApiEditBodyComponent } from './body/api-edit-body.component';
 import { ApiParamsExtraSettingComponent } from './extra-setting/api-params-extra-setting.component';
-import { ApiEditFormComponent } from './form/api-edit-form.component';
 
 const NZ_COMPONETS = [EoNgButtonModule, NzBadgeModule, EoNgCollapseModule, EoNgTreeModule];
-const COMPONENTS = [ApiEditComponent, ApiEditFormComponent, ApiEditBodyComponent, ApiParamsExtraSettingComponent];
+const COMPONENTS = [ApiEditComponent, ApiEditBodyComponent, ApiParamsExtraSettingComponent];
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [

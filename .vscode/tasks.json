@@ -1,49 +1,61 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Build.Main",
-        "type": "shell",
-        "command": "npm run electron:serve-tsc",
-        "isBackground": false,
-        "group": {
-          "kind": "build",
-          "isDefault": true
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Dev",
+      "type": "shell",
+      "command": "yarn start",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^([^\\s].*)\\((\\d+|\\d+,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 3,
+          "code": 4,
+          "message": 5
         },
-        "problemMatcher": {
-          "owner": "typescript",
-          "source": "ts",
-          "applyTo": "closedDocuments",
-          "fileLocation": ["relative", "${cwd}"],
-          "pattern": "$tsc",
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^.*",
-            "endsPattern": "^.*Terminal will be reused by tasks, press any key to close it.*"
-          }
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Compiling...",
+          "endsPattern": "Compiled successfully."
         }
       },
-      {
-        "label": "Build.Renderer",
-        "type": "shell",
-        "command": "npm run serve",
-        "isBackground": true,
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": {
-          "owner": "typescript",
-          "source": "ts",
-          "applyTo": "closedDocuments",
-          "fileLocation": ["relative", "${cwd}"],
-          "pattern": "$tsc",
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^.*",
-            "endsPattern": "^.*Compiled successfully.*"
-          }
-        }
+      "group": {
+        "kind": "test",
+        "isDefault": true
       }
-    ]
-  }
+    },
+    {
+      "label": "Build (No Sign)",
+      "type": "shell",
+      "command": "yarn build:win:noSign",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Production (With Sign)",
+      "type": "shell",
+      "command": "yarn build",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Web Only",
+      "type": "shell",
+      "command": "yarn start:web",
+      "isBackground": true,
+      "group": "test"
+    },
+    {
+      "label": "Start Electron Only",
+      "type": "shell",
+      "command": "yarn start:electron",
+      "isBackground": true,
+      "group": "test"
+    }
+  ]
+}

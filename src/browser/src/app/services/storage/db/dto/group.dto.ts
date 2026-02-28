@@ -1,4 +1,5 @@
 import { GroupModuleType, GroupType } from 'pc/browser/src/app/services/storage/db/models';
+import { RequestParams } from 'pc/browser/src/app/services/storage/db/models/apiData';
 
 export interface GroupDeleteDto {
   id?: number;
@@ -14,6 +15,7 @@ export interface GroupCreateDto {
   depth?: number;
   parentId?: number;
   sort?: number;
+  requestParams?: RequestParams;
   projectUuid?: string;
   workSpaceUuid?: string;
 }

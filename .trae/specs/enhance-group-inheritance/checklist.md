@@ -1,0 +1,5 @@
+- [x] Group model updated to include `requestParams`.
+- [x] Group Edit UI includes "Request Headers" tab.
+- [x] Headers can be added and saved in the group.
+- [x] API inside the group inherits headers correctly.
+- [x] Recursive inheritance (nested groups) works as expected.
